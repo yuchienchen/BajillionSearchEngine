@@ -23,6 +23,9 @@ def common(list1, list2):
     for elem in list1 and list2:
         if elem in list1 and list2:
             lst.append(elem)
+            for elem in lst:
+                if elem == elem:
+                    lst.pop()
     
     return lst
     """
