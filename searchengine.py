@@ -8,6 +8,7 @@ You fill in this comment
 import os
 import sys
 import string
+import doctest
 
 
 def create_index(filenames, index, file_titles):
@@ -60,10 +61,21 @@ def create_index(filenames, index, file_titles):
     >>> file_titles
     {'test1.txt': 'File 1 Title'}
     """
-    pass
+    index = {}
+    file_titles = {}
+    for elem in filenames:
+        for line in elem:
+            line = line.lower().strip(string.punctuation)
+            parts = line.split(" ")
+            for term in parts:
+                index[term] = elem
+
+    return index
     """
     You implement this function.  Don't forget to remove the 'pass' statement above.
     """
+
+doctest.testmod(name='create_index')
 
 
 def search(index, query):
