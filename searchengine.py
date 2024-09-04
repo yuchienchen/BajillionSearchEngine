@@ -64,11 +64,13 @@ def create_index(filenames, index, file_titles):
     index = {}
     file_titles = {}
     for elem in filenames:
-        for line in elem:
-            line = line.lower().strip(string.punctuation)
-            parts = line.split(" ")
-            for term in parts:
-                index[term] = elem
+        # Need to read the file
+        with open(elem) as file:
+            for line in file:
+                line = line.lower().strip(string.punctuation)
+                parts = line.split(" ")
+                for term in parts:
+                    index[term] = elem
 
     return index
     """
