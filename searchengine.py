@@ -65,7 +65,7 @@ def create_index(filenames, index, file_titles):
     file_titles = {}
     lst_files = []
     for elem in filenames:
-        if elem in filenames and elem not in lst_files: 
+        if elem not in lst_files: 
             lst_files.append(elem)
         # Need to read the file
         with open(elem) as file:
