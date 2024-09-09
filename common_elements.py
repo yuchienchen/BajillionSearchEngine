@@ -21,6 +21,7 @@ def common(list1, list2):
     """
     lst = []
     for elem in list1:
+        # List Comprehension with in
         if elem in list2 and elem not in lst:
             lst.append(elem)
     

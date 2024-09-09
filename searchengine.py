@@ -63,14 +63,23 @@ def create_index(filenames, index, file_titles):
     """
     index = {}
     file_titles = {}
+    lst_files = []
     for elem in filenames:
+        if elem in filenames and elem not in lst_files: 
+            lst_files.append(elem)
         # Need to read the file
         with open(elem) as file:
             for line in file:
-                line = line.lower().strip(string.punctuation)
-                parts = line.split(" ")
-                for term in parts:
-                    index[term] = elem
+                if line.strip():
+                    print(line.strip())
+                    line = line.lower().strip()
+                    parts = line.split(" ")
+                    for term in parts:
+                        term = term.strip(string.punctuation)
+                        if term not in index.keys():
+                            index[term] = lst_files
+                        # else:
+                        #     index[term] += [elem]
 
     return index
     """
