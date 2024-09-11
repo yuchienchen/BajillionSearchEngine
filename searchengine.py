@@ -61,16 +61,20 @@ def create_index(filenames, index, file_titles):
     >>> file_titles
     {'test1.txt': 'File 1 Title'}
     """
-    index = {}
-    file_titles = {}
+    # No need to initialize dicts:
+    # index = {}
+    # file_titles = {}
+    
     for filename in filenames:
-        # Using a Loop to Preserve Order
-        if filename not in index: 
+        # Check if filename is already processed in index
+        if filename not in file_titles: 
         # Need to read the file
             with open(filename) as file:
-                first_line = file.readline()
-                if filename not in file_titles.keys():
-                    file_titles[filename] = str(first_line)
+                # Extract the first line as the title and store it
+                first_line = file.readline().strip()    # "with the "newline" character at the end of the line removed"
+                file_titles[filename] = first_line
+
+                # Process the rest of the file to build the index
                 for line in file:   
                     line = line.lower().strip()
                     if line:
@@ -83,7 +87,8 @@ def create_index(filenames, index, file_titles):
                             else:
                                 index[word] = [filename]
 
-    return index, file_titles
+    print(index)
+    print(file_titles)
     """
     You implement this function.  Don't forget to remove the 'pass' statement above.
     """
