@@ -74,6 +74,16 @@ def create_index(filenames, index, file_titles):
                 first_line = file.readline().strip()    # "with the "newline" character at the end of the line removed"
                 file_titles[filename] = first_line
 
+                 # Add title terms to the index
+                title_words = first_line.lower().split()
+                for word in title_words:
+                    word = word.strip(string.punctuation)
+                    if word in index:
+                        if filename not in index[word]:
+                            index[word].append(filename)
+                    else:
+                        index[word] = [filename]
+
                 # Process the rest of the file to build the index
                 for line in file:   
                     line = line.lower().strip()
@@ -87,8 +97,7 @@ def create_index(filenames, index, file_titles):
                             else:
                                 index[word] = [filename]
 
-    print(index)
-    print(file_titles)
+    return index, file_titles
     """
     You implement this function.  Don't forget to remove the 'pass' statement above.
     """
