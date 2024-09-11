@@ -63,26 +63,27 @@ def create_index(filenames, index, file_titles):
     """
     index = {}
     file_titles = {}
-    lst_files = []
     for filename in filenames:
         # Using a Loop to Preserve Order
-        if filename not in lst_files: 
-            lst_files.append(filename)
+        if filename not in index: 
         # Need to read the file
-        with open(filename) as file:
-            for line in file:   
-                if line.strip():
-                    print(line.strip())
+            with open(filename) as file:
+                first_line = file.readline()
+                if filename not in file_titles.keys():
+                    file_titles[filename] = str(first_line)
+                for line in file:   
                     line = line.lower().strip()
-                    words = line.split(" ")
-                    for word in words:
-                        word = word.strip(string.punctuation)
-                        if word not in index.keys():
-                            index[word] = lst_files
-                        else:
-                            index[word] = lst_files
+                    if line:
+                        words = line.split(" ")
+                        for word in words:
+                            word = word.strip(string.punctuation)
+                            if word in index:
+                                if filename not in index[word]:
+                                    index[word].append(filename)
+                            else:
+                                index[word] = [filename]
 
-    return index
+    return index, file_titles
     """
     You implement this function.  Don't forget to remove the 'pass' statement above.
     """
