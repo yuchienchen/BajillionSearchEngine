@@ -139,17 +139,21 @@ def search(index, query):
     >>> search(index, 'apple ball nope')
     []
     """
-    for key, value in index.items():
-        for elem in query:
-            if elem == key:
-                return value
-        else:
-            return None
+    # query is a string
+    # terms = query.strip().split(" ")
+    for value in index.values():
+        for terms in query:
+            terms = query.strip().split(" ")
+            for term in terms:
+                if term in index.keys():
+                    posting_list = value
+
+    return posting_list
 
     """
     You implement this function.  Don't forget to remove the 'pass' statement above.
     """
-
+doctest.testmod(name='search')
 
 ##### YOU SHOULD NOT NEED TO MODIFY ANY CODE BELOW THIS LINE (UNLESS YOU'RE ADDING EXTENSIONS) #####
 
