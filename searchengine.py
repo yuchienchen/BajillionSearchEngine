@@ -141,14 +141,25 @@ def search(index, query):
     """
     # query is a string
     # terms = query.strip().split(" ")
-    for value in index.values():
+    
+    for key, value in index.items():
         for terms in query:
-            terms = query.strip().split(" ")
+            terms = query.strip().split(" ")    # termS is list
             for term in terms:
-                if term in index.keys():
-                    posting_list = value
+                # One term queries
+                if len(terms) == 1:
+                    if term == key:
+                        return value
+                    # else:
+                    #     return []
+                    
+                # multi-term queries
+                if len(terms) > 1:
+                    if term in index.keys():
+                        posting_list = value
+                        for filename in posting_list:
 
-    return posting_list
+    return posting_list 
 
     """
     You implement this function.  Don't forget to remove the 'pass' statement above.
